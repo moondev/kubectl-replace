@@ -1,6 +1,6 @@
 # kubectl-replace
 
-Simply base64 encode the manifest and pass to the image along with the env vars
+Simply base64 encode the manifest and pass to the image along with the env vars. Output can then be piped to kubectl.
 
 ```
 MANIFEST=`base64 deployment.yaml`
