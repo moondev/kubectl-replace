@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: $APP_NAME
+spec:
+  ports:
+    - port: $APP_PORT
+      protocol: TCP
+      targetPort: $APP_PORT
+      name: $APP_NAME
+  selector:
+    app: $APP_NAME
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: $APP_NAME
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: $APP_NAME
+
+    spec:
+
+      volumes:
+        - name: pod-vol
+          emptyDir: {}
+
+      containers:
+
+        - 
+          image: $REG_HOST/$APP_NAME:$TAG
+          imagePullPolicy: Always
+          name: $APP_NAME
+          volumeMounts:
+          - name: pod-vol
+            mountPath: /pod-vol
+          ports: 
+            - 
+              containerPort: $APP_PORT
+              name: $APP_NAME
